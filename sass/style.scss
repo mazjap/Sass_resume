@@ -1,0 +1,137 @@
+@import "_base.scss";
+
+$boxSize: 600px;
+
+$sidebarWidth: 30%;
+$mainContentWidth: 100% - $sidebarWidth;
+
+@mixin flex($justification, $alignment, $direction: row, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justification;
+    align-items: $alignment;
+    flex-wrap: $wrap;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 0 5%;
+    background-color: $backgroundColor;
+
+    h1, .subhead {
+        padding-left: $default-padding;
+    }
+
+    #box {
+        position: absolute;
+        top: -$boxSize / 2;
+        right: -$boxSize / 2;
+        background-color: $mainColor;
+        width: $boxSize;
+        height: $boxSize;
+        transform: rotate(45deg);
+    }
+
+    .divider {
+        height: 2px;
+        background-color: $secondaryColor;
+    }
+
+    .padded-right {
+        margin-right: $boxSize / 3;
+    }
+
+    #sidebar {
+        display: inline;
+        width: $sidebarWidth;
+        border-right: 2px solid $secondaryColor;
+
+        #contact > * {
+            padding-bottom: 10px;
+        }
+
+        #skills {
+            ul {
+                li {
+                    list-style: none;
+                    display: inline;
+                }
+
+                li::after {
+                    content: ' •';
+                }
+
+                li:last-of-type::after {
+                    content: '';
+                }
+            }
+        }
+    }
+
+    #main-content {
+        display: inline;
+        width: $mainContentWidth;
+
+        #profile {
+            padding-right: $boxSize / 3;
+        }
+
+        #social {
+            @include flex(space-between, space-between, $wrap: wrap);
+
+            h2 {
+                display: block;
+                width: 100%;
+            }
+
+            .scl-icn {
+                a {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    img {
+                        height: 40px;
+                    }
+                }
+            }
+        }
+
+        #education {
+            .school {
+                @include flex(flex-start, initial);
+
+                tr {
+                    margin-bottom: 100px;
+
+                    td:last-of-type {
+                        padding-left: 50px;
+                        padding-bottom: $subSectionBottomPadding;
+                    }
+                }
+            }
+        }
+
+        #experience {
+
+            .work {
+                @include flex(flex-start, space-between);
+
+                > p {
+                    margin-right: 50px;
+                    display: inline;
+                }
+
+                .item {
+                    .subtext {
+                        font-style: italic;
+                        color: #444;
+                    }
+                    // display: inline;
+                }
+            }
+        }
+    }
+}
